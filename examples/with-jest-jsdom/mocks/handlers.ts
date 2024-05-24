@@ -1,7 +1,11 @@
 import { http, graphql, HttpResponse } from 'msw'
 
 export const handlers = [
-  http.get('https://api.example.com/user', () => {
+  http.post('https://api.example.com/user', async ({request}) => {
+    console.log("beofore body")
+    console.log(request.url)
+    const formData = await request.formData();
+    console.log("after body", formData)
     return HttpResponse.json({
       firstName: 'John',
       lastName: 'Maverick',

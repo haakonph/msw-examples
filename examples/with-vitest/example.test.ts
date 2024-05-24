@@ -3,7 +3,19 @@
  */
 
 it('fetches the user info', async () => {
-  const response = await fetch('https://api.example.com/user')
+  const formData = new FormData();
+  formData.append('type', 'nisse');
+  const file = new File(['gyldig xml'], 'filnavn.xml');
+  formData.append('fil', file)
+
+  const response = await fetch('https://api.example.com/user', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'content-type': ''
+    },
+    body: formData,
+  })
 
   expect(response.status).toBe(200)
   expect(response.statusText).toBe('OK')

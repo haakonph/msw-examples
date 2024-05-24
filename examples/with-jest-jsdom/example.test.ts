@@ -2,8 +2,19 @@
  * @jest-environment jsdom
  */
 
-it('receives a mocked response to a REST API request', async () => {
-  const response = await fetch('https://api.example.com/user')
+it('fetches the user info', async () => {
+  const formData = new FormData();
+  formData.append('type', "nisse");
+  const file = new File(['gyldig xml'], 'filnavn.xml');
+  formData.append('fil', file)
+
+  const response = await fetch('https://api.example.com/user', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+    },
+    body: formData,
+  })
 
   expect(response.status).toBe(200)
   expect(response.statusText).toBe('OK')
